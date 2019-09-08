@@ -26,8 +26,10 @@ def upgrade():
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('name')
     )
-    op.create_unique_constraint(None, 'category', ['text'])
-    op.create_unique_constraint(None, 'tag', ['text'])
+    with op.batch_alter_table('category') as batch_op:
+        batch_op.create_unique_constraint('udx_category', ['text'])
+    with op.batch_alter_table('tag') as batch_op:
+        batch_op.create_unique_constraint('udx_tag', ['text'])
     # ### end Alembic commands ###
 
 
