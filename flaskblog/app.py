@@ -20,8 +20,7 @@ def create_app(env: Union[str, None] = None) -> Flask:
     models.init_app(app)
     cli.init_app(app)
     views.init_app(app)
-    if get_env() == "development":
-        admin.init_app(app)
+    admin.init_app(app)
     templating.init_app(app)
     api.init_app(app)
     Environment(app)
